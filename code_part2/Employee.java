@@ -28,7 +28,10 @@ public class Employee {
     private String getAddresses(){
         String newstr = "";
         for(int i=0; i < 6; i++){
-            newstr = newstr + address[i].toString() + "\n";
+            if (address[i] != null){
+                newstr = newstr + address[i].toString() + "\n";
+            }
+            
         }
         return newstr;
     }
