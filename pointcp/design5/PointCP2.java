@@ -12,73 +12,33 @@
  * @author Dr Timothy C. Lethbridge
  * @version July 2000
  */
-public class PointCP2 extends PointCP
-{
-  //Instance variables ************************************************
-
-  private double Rho;
-
-  private double Theta;
-
-  public PointCP2( double Rho, double Theta)
-  {
-
-    this.Rho = Rho;
-    this.Theta = Theta;
-
-  }
-
- 
-  public double getX()
-  {
-
-      return (Math.cos(Math.toRadians(Theta)) * Rho);
-  }
+public class PointCP2 extends PointCP{
   
-  public double getY()
+  public void convertStorageToPolar()
   {
-
-      return (Math.sin(Math.toRadians(Theta)) * Rho);
+    if(typeCoord != 'P')
+    {
+      //Calculate RHO and THETA
+      double temp = getRho();
+      yOrTheta = getTheta();
+      xOrRho = temp;
+      
+      typeCoord = 'P';  //Change coord type identifier
+    }
   }
-  
-  public double getRho()
+  public void convertStorageToCartesian()
   {
-
-      return Rho;
-
-  }
-  
-  public double getTheta()
-  {
-
-      return Theta;
-
-
-  }
-  
-	
-  /**
-   * Converts Cartesian coordinates to Polar coordinates.
-   */
-  // public void convertStorageToPolar()
-  {
-
-  }
-	
-  /**
-   * Converts Polar coordinates to Cartesian coordinates.
-   */
-  public PointCP2 convertStorageToCartesian()
-  {
-    
+    if(typeCoord != 'C')
+    {
       //Calculate X and Y
       double temp = getX();
-      double newy = getY();
-      
-   return new PointCP2(temp, newy);
-      
-    
+      yOrTheta = getY();
+      xOrRho = temp;
+   
+      typeCoord = 'C';	//Change coord type identifier
+    }
   }
+  
 
   /**
    * Calculates the distance in between two points using the Pythagorean
@@ -124,6 +84,11 @@ public class PointCP2 extends PointCP
    */
   public String toString()
   {
-    return "Stored  "  + getRho() + "," + getTheta()  + "\n";
+    return "Stored as " + (typeCoord == 'C' 
+       ? "Cartesian  (" + getX() + "," + getY() + ")"
+       : "Polar [" + getRho() + "," + getTheta() + "]") + "\n";
   }
+
+
+  
 }

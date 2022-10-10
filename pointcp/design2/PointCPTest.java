@@ -100,7 +100,7 @@ public class PointCPTest
           
         
         System.out.print("Enter the value of " 
-        +  'C' + (i == 0 ? "X " : "Y ")
+        +  'C' + (i == 0 ? "RHO" : "THETA ")
           
         + "using a decimal point(.): ");
 
